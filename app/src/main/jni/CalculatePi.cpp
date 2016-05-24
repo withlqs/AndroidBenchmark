@@ -6,11 +6,13 @@
 
 JNIEXPORT void JNICALL
 Java_com_lqs_androidbenchmark_BenchmarkJNI_CalculatePi(JNIEnv *env, jclass, jint) {
+    int a = 1, b = 2;
+    a = a + b;
 }
 
 JNIEXPORT jstring JNICALL
 Java_com_lqs_androidbenchmark_BenchmarkJNI_getDemoString(JNIEnv *env, jclass, jint) {
-    return env->NewStringUTF("Test String from JNI");
+    return env->NewStringUTF("Test String from JNI, test 2");
 }
 
 
