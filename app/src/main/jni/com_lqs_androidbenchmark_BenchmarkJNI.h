@@ -10,9 +10,9 @@ extern "C" {
 /*
  * Class:     com_lqs_androidbenchmark_BenchmarkJNI
  * Method:    CalculatePi
- * Signature: (I)V
+ * Signature: (I)D
  */
-JNIEXPORT void JNICALL Java_com_lqs_androidbenchmark_BenchmarkJNI_CalculatePi
+JNIEXPORT jdouble JNICALL Java_com_lqs_androidbenchmark_BenchmarkJNI_CalculatePi
         (JNIEnv *, jclass, jint);
 
 /*
