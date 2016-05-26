@@ -7,12 +7,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import java.util.Date;
-
 public class MainActivity extends AppCompatActivity {
 
     TextView textView;
-    EditText editText;
+    EditText periodEditText;
+    EditText threadNumberEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,17 +22,23 @@ public class MainActivity extends AppCompatActivity {
         textView.setText(BenchmarkJNI.getDemoString(1));
 
         Button button = (Button) findViewById(R.id.button);
-        editText = (EditText) findViewById(R.id.editText);
-        editText.setText("1000");
+        periodEditText = (EditText) findViewById(R.id.periodEditText);
+        periodEditText.setText("1000");
+        threadNumberEditText = (EditText) findViewById(R.id.threadNumberEditText);
+        threadNumberEditText.setText("2");
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Integer integer = new Integer(editText.getText().toString());
-                Date now1 = new Date();
-                double pi = BenchmarkJNI.CalculatePi(integer);
-                Date now2 = new Date();
-                textView.setText(new Double(pi).toString() + " Time:" + (now2.getTime() - now1.getTime()));
+//                Integer integer = new Integer(periodEditText.getText().toString());
+//                Date now1 = new Date();
+//                double pi = BenchmarkJNI.CalculatePi(integer);
+//                Date now2 = new Date();
+//                textView.setText(new Double(pi).toString() + " Time:" + (now2.getTime() - now1.getTime()));
+                int period = new Integer(periodEditText.getText().toString());
+                int threadNumber = new Integer(threadNumberEditText.getText().toString());
+                MultiThreadBenchmark multiThreadBenchmark = new MultiThreadBenchmark(threadNumber, period);
+                textView.setText("" + multiThreadBenchmark.excuteBenchmark());
             }
         });
 

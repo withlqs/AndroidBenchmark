@@ -5,7 +5,7 @@
 
 #include "com_lqs_androidbenchmark_BenchmarkJNI.h"
 
-JNIEXPORT jdouble JNICALL
+JNIEXPORT jint JNICALL
 Java_com_lqs_androidbenchmark_BenchmarkJNI_CalculatePi(JNIEnv *env, jclass, jint period) {
     jdouble x, y;
     const jdouble one = 1.0;
@@ -19,7 +19,7 @@ Java_com_lqs_androidbenchmark_BenchmarkJNI_CalculatePi(JNIEnv *env, jclass, jint
             ++inIt;
         }
     }
-    return (jdouble) (4 * (inIt * one) / period);
+    return inIt;
 
 }
 

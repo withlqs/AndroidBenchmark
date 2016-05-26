@@ -8,7 +8,7 @@ public class BenchmarkJNI {
         System.loadLibrary("CalculatePiJNI");
     }
 
-    public static native double CalculatePi(int i);
+    public static native int CalculatePi(int i);
 
     public static native String getDemoString(int i);
 }
