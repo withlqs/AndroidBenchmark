@@ -9,10 +9,18 @@ extern "C" {
 #endif
 /*
  * Class:     com_lqs_androidbenchmark_BenchmarkJNI
- * Method:    CalculatePi
- * Signature: (I)I
+ * Method:    multiThreadBenchmark
+ * Signature: (II)D
  */
-JNIEXPORT jint JNICALL Java_com_lqs_androidbenchmark_BenchmarkJNI_CalculatePi
+JNIEXPORT jdouble JNICALL Java_com_lqs_androidbenchmark_BenchmarkJNI_multiThreadBenchmark
+        (JNIEnv *, jclass, jint, jint);
+
+/*
+ * Class:     com_lqs_androidbenchmark_BenchmarkJNI
+ * Method:    singleThreadBenchmark
+ * Signature: (I)V
+ */
+JNIEXPORT void JNICALL Java_com_lqs_androidbenchmark_BenchmarkJNI_singleThreadBenchmark
         (JNIEnv *, jclass, jint);
 
 /*

@@ -1,5 +1,7 @@
 package com.lqs.androidbenchmark;
 
+import android.os.Process;
+
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -15,7 +17,8 @@ public class MultiThreadBenchmark {
     Runnable runnable = new Runnable() {
         @Override
         public void run() {
-            BenchmarkJNI.CalculatePi(period);
+            Process.setThreadPriority(-20);
+            BenchmarkJNI.singleThreadBenchmark(period);
             addOver();
         }
     };
@@ -30,12 +33,11 @@ public class MultiThreadBenchmark {
     }
 
     private void singleThreadRun() {
-        BenchmarkJNI.CalculatePi(period);
+        BenchmarkJNI.singleThreadBenchmark(period);
         addOver();
     }
 
     public long excuteBenchmark() {
-        //fixedThreadPool = Executors.newFixedThreadPool(threadNumber+1);
         fixedThreadPool = Executors.newCachedThreadPool();
         startTime = System.currentTimeMillis();
         for (int i = 0; i < threadNumber; i++) {
