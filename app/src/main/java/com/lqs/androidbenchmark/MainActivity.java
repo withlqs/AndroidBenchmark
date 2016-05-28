@@ -29,45 +29,12 @@ public class MainActivity extends AppCompatActivity {
         textView = (TextView) findViewById(R.id.testView);
         textView.setText(BenchmarkJNI.getDemoString(1));
 
-        Button button1 = (Button) findViewById(R.id.button1);
         periodEditText = (EditText) findViewById(R.id.periodEditText);
         periodEditText.setText("100000000");
         threadNumberEditText = (EditText) findViewById(R.id.threadNumberEditText);
         threadNumberEditText.setText("1");
 
-
-        taskList.add(new BenchmarkTask(
-                getProgressDialog("Integer Single Thread Test..."),
-                new ResultProcessor(),
-                BenchmarkMethod.integerBenchmarkMethod,
-                1,
-                100000000
-        ));
-
-        taskList.add(new BenchmarkTask(
-                getProgressDialog("Float Single Thread Test..."),
-                new ResultProcessor(),
-                BenchmarkMethod.floatBenchmarkMethod,
-                1,
-                100000000
-        ));
-
-        taskList.add(new BenchmarkTask(
-                getProgressDialog("Integer Multi-Thread Test..."),
-                new ResultProcessor(),
-                BenchmarkMethod.integerBenchmarkMethod,
-                8,
-                3000000
-        ));
-
-        taskList.add(new BenchmarkTask(
-                getProgressDialog("Float Multi-Thread Test..."),
-                new ResultProcessor(),
-                BenchmarkMethod.floatBenchmarkMethod,
-                8,
-                3000000
-        ));
-
+        Button button1 = (Button) findViewById(R.id.button1);
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -102,6 +69,40 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+        taskList.add(new BenchmarkTask(
+                getProgressDialog("正在进行CPU单线程整数运算性能测试..."),
+                new ResultProcessor(),
+                BenchmarkMethod.integerBenchmarkMethod,
+                1,
+                100000000
+        ));
+
+        taskList.add(new BenchmarkTask(
+                getProgressDialog("正在进行CPU单线程浮点数运算性能测试..."),
+                new ResultProcessor(),
+                BenchmarkMethod.floatBenchmarkMethod,
+                1,
+                100000000
+        ));
+
+        taskList.add(new BenchmarkTask(
+                getProgressDialog("正在进行CPU多线程整数运算性能测试..."),
+                new ResultProcessor(),
+                BenchmarkMethod.integerBenchmarkMethod,
+                8,
+                3000000
+        ));
+
+        taskList.add(new BenchmarkTask(
+                getProgressDialog("正在进行CPU多线程浮点数运算性能测试..."),
+                new ResultProcessor(),
+                BenchmarkMethod.floatBenchmarkMethod,
+                8,
+                3000000
+        ));
+
+
         taskList.get(0).execute();
     }
 
@@ -119,12 +120,13 @@ public class MainActivity extends AppCompatActivity {
 
     public class ResultProcessor {
         private long calculateSingle(long time) {
-            return 22691711 / time;
+            return 22679757 / time;
         }
 
         private long calculateMulti(long time) {
             return 191489600 / time;
         }
+
         public void sendResult(long time) {
 
             if (nowTaskPtr < 2) {
