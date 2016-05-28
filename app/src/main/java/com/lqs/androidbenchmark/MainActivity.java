@@ -49,16 +49,20 @@ public class MainActivity extends AppCompatActivity {
                 ResultProcessor resultProcessor = new ResultProcessor();
                 BenchmarkTask benchmarkTask = new BenchmarkTask(getProgressDialog(), resultProcessor, BenchmarkMethod.integerBenchmarkMethod);
                 benchmarkTask.execute(threadNumber, period);
-//                MultiThreadBenchmark multiThreadBenchmark = new MultiThreadBenchmark(threadNumber, period);
+//                MultiThreadFramework multiThreadBenchmark = new MultiThreadFramework(threadNumber, period);
 //                textView.setText("" + multiThreadBenchmark.excuteBenchmark());
             }
         });
     }
 
     private ProgressDialog getProgressDialog() {
+        return getProgressDialog("Benchmarking...");
+    }
+
+    private ProgressDialog getProgressDialog(String message) {
         ProgressDialog progressDialog = new ProgressDialog(MainActivity.this);
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        progressDialog.setMessage("Benchmarking");
+        progressDialog.setMessage(message);
         progressDialog.setCancelable(false);
         return progressDialog;
     }

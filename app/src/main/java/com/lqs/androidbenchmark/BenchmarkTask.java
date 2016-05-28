@@ -25,8 +25,8 @@ public class BenchmarkTask extends AsyncTask<Integer, Void, Long> {
     protected Long doInBackground(Integer[] params) {
         int threadNumber = params[0];
         int period = params[1];
-        MultiThreadBenchmark multiThreadBenchmark = new MultiThreadBenchmark(threadNumber, period, benchmarkMethod);
-        return multiThreadBenchmark.excuteBenchmark();
+        MultiThreadFramework multiThreadFramework = new MultiThreadFramework(threadNumber, period, benchmarkMethod);
+        return multiThreadFramework.excuteBenchmark();
     }
 
     @Override
