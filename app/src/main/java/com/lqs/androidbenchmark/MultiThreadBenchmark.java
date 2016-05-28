@@ -8,6 +8,7 @@ import java.util.concurrent.Executors;
 /**
  * Created by lqs on 16-5-27.
  */
+
 public class MultiThreadBenchmark {
     long startTime;
     ExecutorService fixedThreadPool;

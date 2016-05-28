@@ -1,5 +1,6 @@
 package com.lqs.androidbenchmark;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -7,11 +8,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+
 public class MainActivity extends AppCompatActivity {
 
-    TextView textView;
-    EditText periodEditText;
-    EditText threadNumberEditText;
+    private TextView textView;
+    private EditText periodEditText;
+    private EditText threadNumberEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
         Button button1 = (Button) findViewById(R.id.button1);
         periodEditText = (EditText) findViewById(R.id.periodEditText);
-        periodEditText.setText("1000");
+        periodEditText.setText("100000000");
         threadNumberEditText = (EditText) findViewById(R.id.threadNumberEditText);
         threadNumberEditText.setText("2");
 
@@ -43,11 +45,26 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 int period = new Integer(periodEditText.getText().toString());
                 int threadNumber = new Integer(threadNumberEditText.getText().toString());
-                MultiThreadBenchmark multiThreadBenchmark = new MultiThreadBenchmark(threadNumber, period);
-                textView.setText("" + multiThreadBenchmark.excuteBenchmark());
+                ResultProcessor resultProcessor = new ResultProcessor();
+                BenchmarkTask benchmarkTask = new BenchmarkTask(getProgressDialog(), resultProcessor);
+                benchmarkTask.execute(threadNumber, period);
+//                MultiThreadBenchmark multiThreadBenchmark = new MultiThreadBenchmark(threadNumber, period);
+//                textView.setText("" + multiThreadBenchmark.excuteBenchmark());
             }
         });
+    }
 
+    private ProgressDialog getProgressDialog() {
+        ProgressDialog progressDialog = new ProgressDialog(MainActivity.this);
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.setMessage("Benchmarking");
+        progressDialog.setCancelable(false);
+        return progressDialog;
+    }
 
+    public class ResultProcessor {
+        public void sendResult(long time) {
+            MainActivity.this.textView.setText("" + time);
+        }
     }
 }
