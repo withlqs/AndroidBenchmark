@@ -27,15 +27,16 @@ public class MainActivity extends AppCompatActivity {
         periodEditText = (EditText) findViewById(R.id.periodEditText);
         periodEditText.setText("100000000");
         threadNumberEditText = (EditText) findViewById(R.id.threadNumberEditText);
-        threadNumberEditText.setText("2");
+        threadNumberEditText.setText("1");
 
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int period = new Integer(periodEditText.getText().toString());
                 int threadNumber = new Integer(threadNumberEditText.getText().toString());
-                double time = BenchmarkJNI.multiThreadBenchmark(threadNumber, period);
-                textView.setText("" + time);
+                ResultProcessor resultProcessor = new ResultProcessor();
+                BenchmarkTask benchmarkTask = new BenchmarkTask(getProgressDialog(), resultProcessor, BenchmarkMethod.floatBenchmarkMethod);
+                benchmarkTask.execute(threadNumber, period);
             }
         });
 
@@ -46,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
                 int period = new Integer(periodEditText.getText().toString());
                 int threadNumber = new Integer(threadNumberEditText.getText().toString());
                 ResultProcessor resultProcessor = new ResultProcessor();
-                BenchmarkTask benchmarkTask = new BenchmarkTask(getProgressDialog(), resultProcessor);
+                BenchmarkTask benchmarkTask = new BenchmarkTask(getProgressDialog(), resultProcessor, BenchmarkMethod.integerBenchmarkMethod);
                 benchmarkTask.execute(threadNumber, period);
 //                MultiThreadBenchmark multiThreadBenchmark = new MultiThreadBenchmark(threadNumber, period);
 //                textView.setText("" + multiThreadBenchmark.excuteBenchmark());

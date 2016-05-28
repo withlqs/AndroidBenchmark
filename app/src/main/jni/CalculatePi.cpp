@@ -39,8 +39,23 @@ void *singleThreadCalculatePi(void *periodPtr) {
 }
 
 JNIEXPORT void JNICALL
-Java_com_lqs_androidbenchmark_BenchmarkJNI_singleThreadBenchmark(JNIEnv *, jclass, jint period) {
+Java_com_lqs_androidbenchmark_BenchmarkJNI_singleThreadFloatBenchmark(JNIEnv *, jclass,
+                                                                      jint period) {
     CalculatePi(&period);
+}
+
+JNIEXPORT void JNICALL
+Java_com_lqs_androidbenchmark_BenchmarkJNI_singleThreadIntergerBenchmark(JNIEnv *, jclass,
+                                                                         jint period) {
+    srand(0);
+    jint a = 0, b = 0;
+    for (jint i = 0; i < period; i++) {
+        if (rand() < rand()) {
+            ++a;
+        } else {
+            ++b;
+        }
+    }
 }
 
 void setPolicyAndPriority(pthread_attr_t *attr) {

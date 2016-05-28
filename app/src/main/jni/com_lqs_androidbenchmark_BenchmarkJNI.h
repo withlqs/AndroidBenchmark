@@ -17,10 +17,18 @@ JNIEXPORT jdouble JNICALL Java_com_lqs_androidbenchmark_BenchmarkJNI_multiThread
 
 /*
  * Class:     com_lqs_androidbenchmark_BenchmarkJNI
- * Method:    singleThreadBenchmark
+ * Method:    singleThreadFloatBenchmark
  * Signature: (I)V
  */
-JNIEXPORT void JNICALL Java_com_lqs_androidbenchmark_BenchmarkJNI_singleThreadBenchmark
+JNIEXPORT void JNICALL Java_com_lqs_androidbenchmark_BenchmarkJNI_singleThreadFloatBenchmark
+        (JNIEnv *, jclass, jint);
+
+/*
+ * Class:     com_lqs_androidbenchmark_BenchmarkJNI
+ * Method:    singleThreadIntergerBenchmark
+ * Signature: (I)V
+ */
+JNIEXPORT void JNICALL Java_com_lqs_androidbenchmark_BenchmarkJNI_singleThreadIntergerBenchmark
         (JNIEnv *, jclass, jint);
 
 /*

@@ -39,7 +39,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/threadNumberEditText"
-        android:text="JNI Multi-Thread" />
+        android:text="float Benchmark" />
 
     <Button
         android:id="@+id/button2"
@@ -47,6 +47,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/button1"
-        android:text="Java Multi-Thread" />
+        android:text="integer Benchmark" />
 
 </RelativeLayout>
