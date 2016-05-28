@@ -1,6 +1,3 @@
-//
-// Created by lqs on 16-5-25.
-//
 #include <stdlib.h>
 #include <pthread.h>
 

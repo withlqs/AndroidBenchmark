@@ -8,12 +8,18 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class MainActivity extends AppCompatActivity {
 
+    List<BenchmarkTask> taskList = new ArrayList<>();
+    List<Long> resultList = new ArrayList<>();
     private TextView textView;
     private EditText periodEditText;
     private EditText threadNumberEditText;
+    private int nowTaskPtr = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,14 +35,52 @@ public class MainActivity extends AppCompatActivity {
         threadNumberEditText = (EditText) findViewById(R.id.threadNumberEditText);
         threadNumberEditText.setText("1");
 
+
+        taskList.add(new BenchmarkTask(
+                getProgressDialog("Integer Single Thread Test..."),
+                new ResultProcessor(),
+                BenchmarkMethod.integerBenchmarkMethod,
+                1,
+                100000000
+        ));
+
+        taskList.add(new BenchmarkTask(
+                getProgressDialog("Float Single Thread Test..."),
+                new ResultProcessor(),
+                BenchmarkMethod.floatBenchmarkMethod,
+                1,
+                100000000
+        ));
+
+        taskList.add(new BenchmarkTask(
+                getProgressDialog("Integer Multi-Thread Test..."),
+                new ResultProcessor(),
+                BenchmarkMethod.integerBenchmarkMethod,
+                8,
+                3000000
+        ));
+
+        taskList.add(new BenchmarkTask(
+                getProgressDialog("Float Multi-Thread Test..."),
+                new ResultProcessor(),
+                BenchmarkMethod.floatBenchmarkMethod,
+                8,
+                3000000
+        ));
+
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int period = new Integer(periodEditText.getText().toString());
                 int threadNumber = new Integer(threadNumberEditText.getText().toString());
                 ResultProcessor resultProcessor = new ResultProcessor();
-                BenchmarkTask benchmarkTask = new BenchmarkTask(getProgressDialog(), resultProcessor, BenchmarkMethod.floatBenchmarkMethod);
-                benchmarkTask.execute(threadNumber, period);
+                BenchmarkTask benchmarkTask = new BenchmarkTask(
+                        getProgressDialog(),
+                        resultProcessor,
+                        BenchmarkMethod.floatBenchmarkMethod,
+                        threadNumber, period
+                );
+                benchmarkTask.execute();
             }
         });
 
@@ -47,12 +91,18 @@ public class MainActivity extends AppCompatActivity {
                 int period = new Integer(periodEditText.getText().toString());
                 int threadNumber = new Integer(threadNumberEditText.getText().toString());
                 ResultProcessor resultProcessor = new ResultProcessor();
-                BenchmarkTask benchmarkTask = new BenchmarkTask(getProgressDialog(), resultProcessor, BenchmarkMethod.integerBenchmarkMethod);
-                benchmarkTask.execute(threadNumber, period);
-//                MultiThreadFramework multiThreadBenchmark = new MultiThreadFramework(threadNumber, period);
-//                textView.setText("" + multiThreadBenchmark.excuteBenchmark());
+                BenchmarkTask benchmarkTask = new BenchmarkTask(
+                        getProgressDialog(),
+                        resultProcessor,
+                        BenchmarkMethod.integerBenchmarkMethod,
+                        threadNumber,
+                        period
+                );
+                benchmarkTask.execute();
             }
         });
+
+        taskList.get(0).execute();
     }
 
     private ProgressDialog getProgressDialog() {
@@ -68,8 +118,26 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public class ResultProcessor {
+        private long calculateSingle(long time) {
+            return 22691711 / time;
+        }
+
+        private long calculateMulti(long time) {
+            return 191489600 / time;
+        }
         public void sendResult(long time) {
-            MainActivity.this.textView.setText("" + time);
+
+            if (nowTaskPtr < 2) {
+                resultList.add(calculateSingle(time));
+            } else {
+                resultList.add(calculateMulti(time));
+            }
+            textView.setText(textView.getText().toString() + "\n" + resultList.get(nowTaskPtr));
+
+            ++nowTaskPtr;
+            if (nowTaskPtr < taskList.size()) {
+                taskList.get(nowTaskPtr).execute();
+            }
         }
     }
 }

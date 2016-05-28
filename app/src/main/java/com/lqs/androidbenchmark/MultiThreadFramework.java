@@ -4,10 +4,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-/**
- * Created by lqs on 16-5-27.
- */
-
 public class MultiThreadFramework {
 
     long startTime;

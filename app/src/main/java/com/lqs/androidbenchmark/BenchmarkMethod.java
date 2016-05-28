@@ -1,8 +1,5 @@
 package com.lqs.androidbenchmark;
 
-/**
- * Created by lqs on 16-5-28.
- */
 public class BenchmarkMethod {
     public static final BenchmarkMethod integerBenchmarkMethod = new BenchmarkMethod() {
         @Override

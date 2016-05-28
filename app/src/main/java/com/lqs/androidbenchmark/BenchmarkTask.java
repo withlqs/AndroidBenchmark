@@ -3,10 +3,7 @@ package com.lqs.androidbenchmark;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 
-/**
- * Created by lqs on 16-5-28.
- */
-public class BenchmarkTask extends AsyncTask<Integer, Void, Long> {
+public class BenchmarkTask extends AsyncTask<Void, Void, Long> {
 
     public static final int INTEGER_BENCHMARK = 0;
     public static final int FLOAT_BENCHMARK = 1;
@@ -14,17 +11,19 @@ public class BenchmarkTask extends AsyncTask<Integer, Void, Long> {
     private ProgressDialog progressDialog;
     private MainActivity.ResultProcessor resultProcessor;
     private BenchmarkMethod benchmarkMethod;
+    private int threadNumber;
+    private int period;
 
-    public BenchmarkTask(ProgressDialog progressDialog, MainActivity.ResultProcessor resultProcessor, BenchmarkMethod benchmarkMethod) {
+    public BenchmarkTask(ProgressDialog progressDialog, MainActivity.ResultProcessor resultProcessor, BenchmarkMethod benchmarkMethod, int threadNumber, int period) {
         this.progressDialog = progressDialog;
         this.resultProcessor = resultProcessor;
         this.benchmarkMethod = benchmarkMethod;
+        this.threadNumber = threadNumber;
+        this.period = period;
     }
 
     @Override
-    protected Long doInBackground(Integer[] params) {
-        int threadNumber = params[0];
-        int period = params[1];
+    protected Long doInBackground(Void[] params) {
         MultiThreadFramework multiThreadFramework = new MultiThreadFramework(threadNumber, period, benchmarkMethod);
         return multiThreadFramework.excuteBenchmark();
     }
