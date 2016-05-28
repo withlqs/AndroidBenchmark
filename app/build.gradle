@@ -8,8 +8,8 @@ android {
         applicationId "com.lqs.androidbenchmark"
         minSdkVersion 21
         targetSdkVersion 23
-        versionCode 2
-        versionName "1.1"
+        versionCode 3
+        versionName "1.2"
         ndk {
             moduleName "CalculatePiJNI"
             //abiFilters "armeabi", "armeabi-v7a", "x86" //输出指定三种abi体系结构下的so库，目前可有可无
