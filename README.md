@@ -1,4 +1,4 @@
 # Android Benchmark
 
 
-Run benchmark for single and multi thread on Android devices.
+Run benchmark for single and multi threads on Android devices.
