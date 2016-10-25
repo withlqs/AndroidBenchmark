@@ -1,2 +1,4 @@
 # Android Benchmark
-课设再不做就做不完啦
+
+
+Run benchmark for single and multi thread on Android devices.
